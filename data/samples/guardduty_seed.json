@@ -1,0 +1,65 @@
+[
+  {
+    "Id": "sample-0001",
+    "Type": "UnauthorizedAccess:EC2/SSHBruteForce",
+    "Title": "SSH brute force attacks against i-99999999.",
+    "Description": "EC2 instance i-99999999 is being probed for SSH weak passwords.",
+    "Severity": 2.0,
+    "CreatedAt": "2026-08-14T09:12:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {"InstanceId": "i-99999999"}
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {"IpAddressV4": "198.51.100.4"}
+        }
+      }
+    }
+  },
+  {
+    "Id": "sample-0002",
+    "Type": "Persistence:IAMUser/AnomalousBehavior",
+    "Title": "An API was invoked in an anomalous way by admin-user.",
+    "Description": "APIs commonly used to establish persistence were invoked.",
+    "Severity": 7.5,
+    "CreatedAt": "2026-08-15T02:41:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {"UserName": "admin-user", "PrincipalId": "AIDAEXAMPLE"}
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {"IpAddressV4": "203.0.113.77"}
+        }
+      }
+    }
+  },
+  {
+    "Id": "sample-0003",
+    "Type": "Recon:IAMUser/MaliciousIPCaller",
+    "Title": "API GetCallerIdentity was invoked from a known malicious IP.",
+    "Description": "Reconnaissance API invoked from a threat-listed address.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-08-15T22:03:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {"UserName": "svc-backup", "PrincipalId": "AIDAEXAMPLE2"}
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {"IpAddressV4": "192.0.2.55"}
+        }
+      }
+    }
+  }
+]
