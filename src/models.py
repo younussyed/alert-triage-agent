@@ -51,3 +51,40 @@ class TriageResult(BaseModel):
     rationale: str
     recommended_action: str
     evidence_used: list[str] = Field(default_factory=list)
+
+
+class PrincipalContext(BaseModel):
+    """What we know about the identity that triggered the alert."""
+    name: str
+    exists: bool = True
+    age_days: int | None = None
+    is_service_account: bool = False
+    has_admin_policy: bool = False
+    attached_policies: list[str] = Field(default_factory=list)
+    mfa_enabled: bool | None = None
+
+
+class NetworkContext(BaseModel):
+    """What we know about the source of the activity."""
+    ip: str | None = None
+    country: str | None = None
+    is_known_cloud_provider: bool = False
+    is_corporate_range: bool = False
+    threat_intel_hits: list[str] = Field(default_factory=list)
+
+
+class BehaviorContext(BaseModel):
+    """Historical baseline for this alert / principal."""
+    alert_type_count_90d: int = 0
+    principal_seen_before: bool = True
+    unusual_hour: bool = False
+    prior_true_positive_rate: float | None = None
+
+
+class EnrichedAlert(BaseModel):
+    """An Alert plus everything we gathered about it."""
+    alert: Alert
+    principal_ctx: PrincipalContext | None = None
+    network_ctx: NetworkContext | None = None
+    behavior_ctx: BehaviorContext | None = None
+    enrichment_errors: list[str] = Field(default_factory=list)
