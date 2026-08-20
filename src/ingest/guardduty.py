@@ -24,6 +24,7 @@ def normalize(finding: dict) -> Alert:
     svc = finding.get("Service", {})
     action = svc.get("Action", {})
     resource = finding.get("Resource", {})
+    keys = resource.get("AccessKeyDetails", {})
 
     principal = (
         resource.get("AccessKeyDetails", {}).get("UserName")
@@ -40,9 +41,8 @@ def normalize(finding: dict) -> Alert:
     resource_type = resource.get("ResourceType")
     resource_name = (
         resource.get("InstanceDetails", {}).get("InstanceId")
-        or resource.get("S3BucketDetails", [{}])[0].get("Name")
-        if resource.get("S3BucketDetails") else
-        resource.get("InstanceDetails", {}).get("InstanceId")
+        or (resource.get("S3BucketDetails") or [{}])[0].get("Name")
+        or keys.get("UserName")
     )
 
     return Alert(

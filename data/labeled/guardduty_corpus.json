@@ -1,0 +1,1038 @@
+[
+  {
+    "Id": "corpus-0001",
+    "Type": "Recon:EC2/PortProbeUnprotectedPort",
+    "Title": "Unprotected port on i-0a1b2c3d is being probed.",
+    "Description": "EC2 instance has an unprotected port being probed by a known scanner.",
+    "Severity": 2.0,
+    "CreatedAt": "2026-07-02T14:22:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0a1b2c3d"
+      }
+    },
+    "Service": {
+      "Action": {
+        "PortProbeAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.20"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0002",
+    "Type": "Recon:IAMUser/MaliciousIPCaller",
+    "Title": "API DescribeInstances was invoked from a known malicious IP.",
+    "Description": "Reconnaissance API invoked from a threat-listed address.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-07-03T11:05:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "svc-inventory",
+        "PrincipalId": "AIDACORP001"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "192.0.2.55"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0003",
+    "Type": "Recon:IAMUser/TorIPCaller",
+    "Title": "API ListBuckets was invoked from a Tor exit node.",
+    "Description": "An API commonly used for discovery was invoked from a Tor exit node.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-07-05T03:41:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "dev-marcus",
+        "PrincipalId": "AIDACORP002"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.9"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0004",
+    "Type": "Recon:EC2/PortProbeUnprotectedPort",
+    "Title": "Unprotected port on i-0deadbeef is being probed.",
+    "Description": "Multiple ports probed in rapid succession from a single source.",
+    "Severity": 2.0,
+    "CreatedAt": "2026-07-06T09:14:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0deadbeef"
+      }
+    },
+    "Service": {
+      "Action": {
+        "PortProbeAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.21"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0005",
+    "Type": "Recon:IAMUser/MaliciousIPCaller",
+    "Title": "API GetCallerIdentity was invoked from a known malicious IP.",
+    "Description": "Identity enumeration API invoked from a threat-listed address.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-07-08T22:50:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "ci-deploy",
+        "PrincipalId": "AIDACORP003"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "192.0.2.77"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0006",
+    "Type": "CredentialAccess:IAMUser/AnomalousBehavior",
+    "Title": "An API used to gather credentials was invoked anomalously.",
+    "Description": "GetSecretValue invoked at a volume inconsistent with baseline.",
+    "Severity": 7.0,
+    "CreatedAt": "2026-07-09T02:17:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "dev-priya",
+        "PrincipalId": "AIDACORP004"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.44"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0007",
+    "Type": "UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration",
+    "Title": "Instance role credentials used from an external IP address.",
+    "Description": "Credentials created for i-0c9d8e7f were used from outside AWS.",
+    "Severity": 8.0,
+    "CreatedAt": "2026-07-10T16:33:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "i-0c9d8e7f-role",
+        "PrincipalId": "AIDACORP005"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.101"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0008",
+    "Type": "CredentialAccess:IAMUser/AnomalousBehavior",
+    "Title": "An API used to gather credentials was invoked anomalously.",
+    "Description": "ListAccessKeys invoked outside normal pattern.",
+    "Severity": 7.0,
+    "CreatedAt": "2026-07-11T13:02:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "sec-auditor",
+        "PrincipalId": "AIDACORP006"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.20.30.40"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0009",
+    "Type": "Persistence:IAMUser/AnomalousBehavior",
+    "Title": "An API used to establish persistence was invoked anomalously.",
+    "Description": "CreateUser and AttachUserPolicy invoked in rapid succession.",
+    "Severity": 7.5,
+    "CreatedAt": "2026-07-12T04:08:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "dev-marcus",
+        "PrincipalId": "AIDACORP002"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.9"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0010",
+    "Type": "Persistence:IAMUser/NetworkPermissions",
+    "Title": "An API used to modify network permissions was invoked anomalously.",
+    "Description": "AuthorizeSecurityGroupIngress opened 0.0.0.0/0 on port 22.",
+    "Severity": 6.5,
+    "CreatedAt": "2026-07-13T15:44:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "dev-alex",
+        "PrincipalId": "AIDACORP007"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.20.30.55"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0011",
+    "Type": "Persistence:IAMUser/ResourcePermissions",
+    "Title": "An API used to change resource permissions was invoked anomalously.",
+    "Description": "PutBucketPolicy granted cross-account access to an unknown account.",
+    "Severity": 7.5,
+    "CreatedAt": "2026-07-14T23:19:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "S3Bucket",
+      "S3BucketDetails": [
+        {
+          "Name": "finance-reports-prod"
+        }
+      ]
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.150"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0012",
+    "Type": "Persistence:IAMUser/AnomalousBehavior",
+    "Title": "An API used to establish persistence was invoked anomalously.",
+    "Description": "CreateAccessKey invoked for an existing service account.",
+    "Severity": 7.5,
+    "CreatedAt": "2026-07-15T10:27:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "svc-terraform",
+        "PrincipalId": "AIDACORP008"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.20.30.12"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0013",
+    "Type": "PrivilegeEscalation:IAMUser/AdministrativePermissions",
+    "Title": "An attempt to assign administrative permissions was detected.",
+    "Description": "AttachUserPolicy attached AdministratorAccess to a low-privilege user.",
+    "Severity": 8.0,
+    "CreatedAt": "2026-07-16T01:52:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "temp-contractor",
+        "PrincipalId": "AIDACORP009"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.88"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0014",
+    "Type": "PrivilegeEscalation:IAMUser/AdministrativePermissions",
+    "Title": "An attempt to assign administrative permissions was detected.",
+    "Description": "AttachRolePolicy attached a broad policy to a deployment role.",
+    "Severity": 8.0,
+    "CreatedAt": "2026-07-17T14:11:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "svc-terraform",
+        "PrincipalId": "AIDACORP008"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.20.30.12"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0015",
+    "Type": "Exfiltration:S3/ObjectRead.Unusual",
+    "Title": "An unusual volume of objects was read from finance-reports-prod.",
+    "Description": "Object read volume exceeded baseline by two orders of magnitude.",
+    "Severity": 7.5,
+    "CreatedAt": "2026-07-18T02:44:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "S3Bucket",
+      "S3BucketDetails": [
+        {
+          "Name": "finance-reports-prod"
+        }
+      ]
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.150"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0016",
+    "Type": "Exfiltration:S3/ObjectRead.Unusual",
+    "Title": "An unusual volume of objects was read from analytics-raw-events.",
+    "Description": "Object read volume exceeded baseline significantly.",
+    "Severity": 7.5,
+    "CreatedAt": "2026-07-19T06:00:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "S3Bucket",
+      "S3BucketDetails": [
+        {
+          "Name": "analytics-raw-events"
+        }
+      ]
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.40.1.9"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0017",
+    "Type": "Exfiltration:IAMUser/AnomalousBehavior",
+    "Title": "An API used for data exfiltration was invoked anomalously.",
+    "Description": "CreateSnapshot followed by ModifySnapshotAttribute making it public.",
+    "Severity": 8.5,
+    "CreatedAt": "2026-07-20T03:30:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "temp-contractor",
+        "PrincipalId": "AIDACORP009"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.88"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0018",
+    "Type": "CryptoCurrency:EC2/BitcoinTool.B!DNS",
+    "Title": "i-0f1e2d3c is querying a domain associated with mining pools.",
+    "Description": "Instance queried a Bitcoin mining pool domain.",
+    "Severity": 8.0,
+    "CreatedAt": "2026-07-21T18:05:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0f1e2d3c"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.60"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0019",
+    "Type": "CryptoCurrency:EC2/BitcoinTool.B",
+    "Title": "i-0research99 is communicating with a mining pool.",
+    "Description": "Instance is connecting to a Bitcoin mining pool.",
+    "Severity": 8.0,
+    "CreatedAt": "2026-07-22T12:40:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0research99"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.61"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0020",
+    "Type": "UnauthorizedAccess:EC2/SSHBruteForce",
+    "Title": "SSH brute force attacks against i-0a1b2c3d.",
+    "Description": "Instance is being probed for SSH weak passwords.",
+    "Severity": 2.0,
+    "CreatedAt": "2026-07-23T08:12:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0a1b2c3d"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.30"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0021",
+    "Type": "UnauthorizedAccess:EC2/RDPBruteForce",
+    "Title": "RDP brute force attacks against i-0win0001.",
+    "Description": "Instance is being probed for RDP weak passwords.",
+    "Severity": 2.0,
+    "CreatedAt": "2026-07-24T20:36:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0win0001"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.31"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0022",
+    "Type": "UnauthorizedAccess:EC2/SSHBruteForce",
+    "Title": "SSH brute force attacks against i-0jump0001.",
+    "Description": "Sustained credential attempts against the bastion host.",
+    "Severity": 2.0,
+    "CreatedAt": "2026-07-25T04:55:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0jump0001"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.201"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0023",
+    "Type": "UnauthorizedAccess:IAMUser/ConsoleLoginSuccess.B",
+    "Title": "Console login succeeded from an unusual location.",
+    "Description": "Successful console sign-in from a geography not seen before.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-07-26T09:03:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "dev-priya",
+        "PrincipalId": "AIDACORP004"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.90"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0024",
+    "Type": "UnauthorizedAccess:IAMUser/ConsoleLoginSuccess.B",
+    "Title": "Console login succeeded from an unusual location.",
+    "Description": "Successful console sign-in from a geography not seen before.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-07-27T02:21:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "finance-admin",
+        "PrincipalId": "AIDACORP010"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.212"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0025",
+    "Type": "Stealth:IAMUser/CloudTrailLoggingDisabled",
+    "Title": "CloudTrail logging was disabled.",
+    "Description": "StopLogging was invoked on the organisation trail.",
+    "Severity": 8.0,
+    "CreatedAt": "2026-07-28T03:07:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "temp-contractor",
+        "PrincipalId": "AIDACORP009"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.88"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0026",
+    "Type": "Stealth:S3/ServerAccessLoggingDisabled",
+    "Title": "S3 server access logging was disabled on a bucket.",
+    "Description": "PutBucketLogging removed logging configuration.",
+    "Severity": 6.0,
+    "CreatedAt": "2026-07-29T11:48:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "S3Bucket",
+      "S3BucketDetails": [
+        {
+          "Name": "legacy-static-assets"
+        }
+      ]
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.20.30.12"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0027",
+    "Type": "Impact:IAMUser/AnomalousBehavior",
+    "Title": "An API commonly used to tamper with data was invoked anomalously.",
+    "Description": "DeleteObjects invoked across multiple prefixes.",
+    "Severity": 7.5,
+    "CreatedAt": "2026-07-30T01:14:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "S3Bucket",
+      "S3BucketDetails": [
+        {
+          "Name": "customer-uploads-prod"
+        }
+      ]
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.212"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0028",
+    "Type": "Backdoor:EC2/C&CActivity.B!DNS",
+    "Title": "i-0f1e2d3c is querying a domain associated with a known C2 server.",
+    "Description": "Instance queried a command-and-control domain.",
+    "Severity": 8.5,
+    "CreatedAt": "2026-07-31T19:26:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0f1e2d3c"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.70"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0029",
+    "Type": "Trojan:EC2/DNSDataExfiltration",
+    "Title": "i-0f1e2d3c is exfiltrating data through DNS queries.",
+    "Description": "Instance is generating high-entropy DNS queries to a single domain.",
+    "Severity": 8.0,
+    "CreatedAt": "2026-08-01T02:03:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0f1e2d3c"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.71"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0030",
+    "Type": "Backdoor:EC2/C&CActivity.B!DNS",
+    "Title": "i-0secops01 is querying a domain associated with a known C2 server.",
+    "Description": "Instance queried a flagged domain.",
+    "Severity": 8.5,
+    "CreatedAt": "2026-08-02T15:33:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0secops01"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.72"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0031",
+    "Type": "Policy:S3/BucketBlockPublicAccessDisabled",
+    "Title": "Block Public Access was disabled on a bucket.",
+    "Description": "S3 Block Public Access settings were removed.",
+    "Severity": 4.0,
+    "CreatedAt": "2026-08-03T10:19:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "S3Bucket",
+      "S3BucketDetails": [
+        {
+          "Name": "public-website-assets"
+        }
+      ]
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.20.30.12"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0032",
+    "Type": "Policy:S3/BucketAnonymousAccessGranted",
+    "Title": "Anonymous access was granted to a bucket.",
+    "Description": "Bucket policy now permits unauthenticated read.",
+    "Severity": 6.0,
+    "CreatedAt": "2026-08-04T23:58:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "S3Bucket",
+      "S3BucketDetails": [
+        {
+          "Name": "customer-uploads-prod"
+        }
+      ]
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.212"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0033",
+    "Type": "Policy:IAMUser/RootCredentialUsage",
+    "Title": "The root user credentials were used.",
+    "Description": "API activity was recorded for the account root user.",
+    "Severity": 6.0,
+    "CreatedAt": "2026-08-05T13:40:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "root",
+        "PrincipalId": "AIDAROOT"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.20.30.5"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0034",
+    "Type": "Policy:IAMUser/RootCredentialUsage",
+    "Title": "The root user credentials were used.",
+    "Description": "API activity was recorded for the account root user.",
+    "Severity": 6.0,
+    "CreatedAt": "2026-08-06T03:52:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "root",
+        "PrincipalId": "AIDAROOT"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.240"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0035",
+    "Type": "Discovery:S3/MaliciousIPCaller",
+    "Title": "ListBuckets was invoked from a known malicious IP.",
+    "Description": "Bucket enumeration from a threat-listed address.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-08-07T04:26:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "S3Bucket",
+      "S3BucketDetails": [
+        {
+          "Name": "unknown"
+        }
+      ]
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.150"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0036",
+    "Type": "Discovery:IAMUser/AnomalousBehavior",
+    "Title": "An API commonly used for discovery was invoked anomalously.",
+    "Description": "DescribeInstances, ListRoles and GetAccountAuthorizationDetails in sequence.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-08-08T09:31:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "sec-auditor",
+        "PrincipalId": "AIDACORP006"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "10.20.30.40"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0037",
+    "Type": "Discovery:IAMUser/AnomalousBehavior",
+    "Title": "An API commonly used for discovery was invoked anomalously.",
+    "Description": "Rapid enumeration of IAM roles and trust policies.",
+    "Severity": 5.0,
+    "CreatedAt": "2026-08-09T02:58:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "temp-contractor",
+        "PrincipalId": "AIDACORP009"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.88"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0038",
+    "Type": "UnauthorizedAccess:EC2/TorClient",
+    "Title": "i-0build0007 is communicating with a Tor entry node.",
+    "Description": "Instance established a connection to a Tor network entry node.",
+    "Severity": 7.0,
+    "CreatedAt": "2026-08-10T17:12:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0build0007"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.80"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0039",
+    "Type": "Impact:EC2/AbusedDomainRequest.Reputation",
+    "Title": "i-0a1b2c3d is querying a low-reputation domain.",
+    "Description": "Instance queried a domain with a poor reputation score.",
+    "Severity": 3.0,
+    "CreatedAt": "2026-08-11T14:07:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0a1b2c3d"
+      }
+    },
+    "Service": {
+      "Action": {
+        "NetworkConnectionAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "198.51.100.85"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Id": "corpus-0040",
+    "Type": "PrivilegeEscalation:IAMUser/AdministrativePermissions",
+    "Title": "An attempt to assign administrative permissions was detected.",
+    "Description": "CreateUser followed by AttachUserPolicy with AdministratorAccess.",
+    "Severity": 8.0,
+    "CreatedAt": "2026-08-12T04:44:00.000Z",
+    "Region": "us-east-1",
+    "AccountId": "111111111111",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "UserName": "finance-admin",
+        "PrincipalId": "AIDACORP010"
+      }
+    },
+    "Service": {
+      "Action": {
+        "AwsApiCallAction": {
+          "RemoteIpDetails": {
+            "IpAddressV4": "203.0.113.212"
+          }
+        }
+      }
+    }
+  }
+]

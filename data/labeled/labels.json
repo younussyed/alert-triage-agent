@@ -1,0 +1,242 @@
+{
+  "corpus-0001": {
+    "label": "benign",
+    "reason": "Untargeted internet-wide scanning against a single exposed port. No authentication attempt, no follow-on activity.",
+    "difficulty": "easy",
+    "finding_type": "Recon:EC2/PortProbeUnprotectedPort"
+  },
+  "corpus-0002": {
+    "label": "benign",
+    "reason": "Long-lived read-only service account performing its routine inventory sweep. Threat-list hit is a stale shared-hosting entry.",
+    "difficulty": "hard",
+    "finding_type": "Recon:IAMUser/MaliciousIPCaller"
+  },
+  "corpus-0003": {
+    "label": "malicious",
+    "reason": "Interactive developer credentials used via Tor at 3am. No business reason for anonymised access; consistent with stolen key usage.",
+    "difficulty": "easy",
+    "finding_type": "Recon:IAMUser/TorIPCaller"
+  },
+  "corpus-0004": {
+    "label": "benign",
+    "reason": "Routine background scanning. Instance sits behind a security group that denies the probed ports.",
+    "difficulty": "easy",
+    "finding_type": "Recon:EC2/PortProbeUnprotectedPort"
+  },
+  "corpus-0005": {
+    "label": "benign",
+    "reason": "CI runner calls GetCallerIdentity on every pipeline start. Source is the build vendor's shared egress range, which carries a stale listing.",
+    "difficulty": "hard",
+    "finding_type": "Recon:IAMUser/MaliciousIPCaller"
+  },
+  "corpus-0006": {
+    "label": "malicious",
+    "reason": "Bulk secret retrieval at 2am from an unfamiliar IP by a developer account that normally reads two secrets a week.",
+    "difficulty": "easy",
+    "finding_type": "CredentialAccess:IAMUser/AnomalousBehavior"
+  },
+  "corpus-0007": {
+    "label": "malicious",
+    "reason": "Instance role credentials should never be used off-instance. Textbook SSRF or metadata-service theft.",
+    "difficulty": "easy",
+    "finding_type": "UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration"
+  },
+  "corpus-0008": {
+    "label": "benign",
+    "reason": "Security team's quarterly access-key audit, run from the corporate network during business hours.",
+    "difficulty": "hard",
+    "finding_type": "CredentialAccess:IAMUser/AnomalousBehavior"
+  },
+  "corpus-0009": {
+    "label": "malicious",
+    "reason": "Same principal and IP as the Tor recon event, now creating a new admin identity at 4am. Clear attacker persistence step.",
+    "difficulty": "easy",
+    "finding_type": "Persistence:IAMUser/AnomalousBehavior"
+  },
+  "corpus-0010": {
+    "label": "benign",
+    "reason": "Developer temporarily opened SSH from the office network during a documented incident bridge. Poor practice, not an intrusion.",
+    "difficulty": "hard",
+    "finding_type": "Persistence:IAMUser/NetworkPermissions"
+  },
+  "corpus-0011": {
+    "label": "malicious",
+    "reason": "Cross-account grant on a sensitive bucket to an unrecognised account, made late at night from an external address.",
+    "difficulty": "easy",
+    "finding_type": "Persistence:IAMUser/ResourcePermissions"
+  },
+  "corpus-0012": {
+    "label": "benign",
+    "reason": "Scheduled key rotation performed by the platform team from the corporate range. Old key deactivated minutes later.",
+    "difficulty": "hard",
+    "finding_type": "Persistence:IAMUser/AnomalousBehavior"
+  },
+  "corpus-0013": {
+    "label": "malicious",
+    "reason": "Contractor account self-escalating to full admin at 2am from an external IP. No change ticket, no approval.",
+    "difficulty": "easy",
+    "finding_type": "PrivilegeEscalation:IAMUser/AdministrativePermissions"
+  },
+  "corpus-0014": {
+    "label": "benign",
+    "reason": "Infrastructure-as-code apply expanding a deployment role, run by the usual automation principal from the corporate range in work hours.",
+    "difficulty": "hard",
+    "finding_type": "PrivilegeEscalation:IAMUser/AdministrativePermissions"
+  },
+  "corpus-0015": {
+    "label": "malicious",
+    "reason": "Mass read of a sensitive bucket at 2am from the same external IP that modified its policy days earlier. Completes the exfiltration chain.",
+    "difficulty": "easy",
+    "finding_type": "Exfiltration:S3/ObjectRead.Unusual"
+  },
+  "corpus-0016": {
+    "label": "benign",
+    "reason": "Monthly analytics backfill job. Runs from a private subnet, same 6am slot every month, reads the same prefix.",
+    "difficulty": "hard",
+    "finding_type": "Exfiltration:S3/ObjectRead.Unusual"
+  },
+  "corpus-0017": {
+    "label": "malicious",
+    "reason": "Snapshotting a volume and making the snapshot public is a well-known exfiltration path with no legitimate use here.",
+    "difficulty": "easy",
+    "finding_type": "Exfiltration:IAMUser/AnomalousBehavior"
+  },
+  "corpus-0018": {
+    "label": "malicious",
+    "reason": "Production instance contacting a mining pool. Consistent with post-compromise resource abuse.",
+    "difficulty": "easy",
+    "finding_type": "CryptoCurrency:EC2/BitcoinTool.B!DNS"
+  },
+  "corpus-0019": {
+    "label": "benign",
+    "reason": "Blockchain research sandbox that legitimately runs mining software. Documented exception, isolated account.",
+    "difficulty": "hard",
+    "finding_type": "CryptoCurrency:EC2/BitcoinTool.B"
+  },
+  "corpus-0020": {
+    "label": "benign",
+    "reason": "Continuous internet background noise. Key-only authentication is enforced; no successful logins.",
+    "difficulty": "easy",
+    "finding_type": "UnauthorizedAccess:EC2/SSHBruteForce"
+  },
+  "corpus-0021": {
+    "label": "benign",
+    "reason": "Untargeted scanning. RDP is restricted to a bastion security group.",
+    "difficulty": "easy",
+    "finding_type": "UnauthorizedAccess:EC2/RDPBruteForce"
+  },
+  "corpus-0022": {
+    "label": "malicious",
+    "reason": "Sustained, targeted attempts against the bastion specifically, from a single source, followed by a successful authentication.",
+    "difficulty": "hard",
+    "finding_type": "UnauthorizedAccess:EC2/SSHBruteForce"
+  },
+  "corpus-0023": {
+    "label": "benign",
+    "reason": "Developer travelling; login used MFA and matches their known device and normal working hours in the new timezone.",
+    "difficulty": "hard",
+    "finding_type": "UnauthorizedAccess:IAMUser/ConsoleLoginSuccess.B"
+  },
+  "corpus-0024": {
+    "label": "malicious",
+    "reason": "Privileged finance account, no MFA on the session, 2am, unfamiliar geography, immediately followed by permission changes.",
+    "difficulty": "easy",
+    "finding_type": "UnauthorizedAccess:IAMUser/ConsoleLoginSuccess.B"
+  },
+  "corpus-0025": {
+    "label": "malicious",
+    "reason": "Disabling audit logging has no legitimate operational purpose here and is a classic anti-forensics step.",
+    "difficulty": "easy",
+    "finding_type": "Stealth:IAMUser/CloudTrailLoggingDisabled"
+  },
+  "corpus-0026": {
+    "label": "benign",
+    "reason": "Decommissioning a legacy static-assets bucket. Change ticket exists; performed by automation from the corporate range.",
+    "difficulty": "hard",
+    "finding_type": "Stealth:S3/ServerAccessLoggingDisabled"
+  },
+  "corpus-0027": {
+    "label": "malicious",
+    "reason": "Bulk deletion in a production bucket overnight from the same external IP as the finance-admin compromise.",
+    "difficulty": "easy",
+    "finding_type": "Impact:IAMUser/AnomalousBehavior"
+  },
+  "corpus-0028": {
+    "label": "malicious",
+    "reason": "C2 beaconing from the same instance later seen mining. Strong indicator of established compromise.",
+    "difficulty": "easy",
+    "finding_type": "Backdoor:EC2/C&CActivity.B!DNS"
+  },
+  "corpus-0029": {
+    "label": "malicious",
+    "reason": "DNS tunnelling from an already-compromised host. Completes the compromise chain for this instance.",
+    "difficulty": "easy",
+    "finding_type": "Trojan:EC2/DNSDataExfiltration"
+  },
+  "corpus-0030": {
+    "label": "benign",
+    "reason": "Security team's malware analysis sandbox deliberately resolving C2 domains. Isolated VPC, documented exception.",
+    "difficulty": "hard",
+    "finding_type": "Backdoor:EC2/C&CActivity.B!DNS"
+  },
+  "corpus-0031": {
+    "label": "benign",
+    "reason": "Bucket intentionally serves a public static website. Change made by automation with an approved ticket.",
+    "difficulty": "easy",
+    "finding_type": "Policy:S3/BucketBlockPublicAccessDisabled"
+  },
+  "corpus-0032": {
+    "label": "malicious",
+    "reason": "Production bucket holding customer data opened to anonymous read, late at night, from a known-compromised principal's IP.",
+    "difficulty": "easy",
+    "finding_type": "Policy:S3/BucketAnonymousAccessGranted"
+  },
+  "corpus-0033": {
+    "label": "benign",
+    "reason": "Annual billing-settings change that genuinely requires root, performed from the corporate range with MFA during business hours.",
+    "difficulty": "hard",
+    "finding_type": "Policy:IAMUser/RootCredentialUsage"
+  },
+  "corpus-0034": {
+    "label": "malicious",
+    "reason": "Root usage at 3am from an unrecognised external IP. Root should never be used this way; treat as full account compromise.",
+    "difficulty": "easy",
+    "finding_type": "Policy:IAMUser/RootCredentialUsage"
+  },
+  "corpus-0035": {
+    "label": "malicious",
+    "reason": "Bucket enumeration from the IP already tied to the finance-reports policy change and mass read. Part of the same campaign.",
+    "difficulty": "easy",
+    "finding_type": "Discovery:S3/MaliciousIPCaller"
+  },
+  "corpus-0036": {
+    "label": "benign",
+    "reason": "Security auditor running the scheduled posture assessment from the corporate network. Matches prior monthly runs exactly.",
+    "difficulty": "easy",
+    "finding_type": "Discovery:IAMUser/AnomalousBehavior"
+  },
+  "corpus-0037": {
+    "label": "malicious",
+    "reason": "Trust-policy enumeration at 3am by the contractor account already seen escalating privileges. Mapping lateral movement paths.",
+    "difficulty": "easy",
+    "finding_type": "Discovery:IAMUser/AnomalousBehavior"
+  },
+  "corpus-0038": {
+    "label": "benign",
+    "reason": "Build agent pulling a dependency whose mirror is Tor-hosted. Verified against the build log; repeats on every pipeline run.",
+    "difficulty": "hard",
+    "finding_type": "UnauthorizedAccess:EC2/TorClient"
+  },
+  "corpus-0039": {
+    "label": "benign",
+    "reason": "Low-reputation score driven by a shared hosting provider. Domain is a legitimate vendor API the application calls constantly.",
+    "difficulty": "easy",
+    "finding_type": "Impact:EC2/AbusedDomainRequest.Reputation"
+  },
+  "corpus-0040": {
+    "label": "malicious",
+    "reason": "Compromised finance-admin creating a fresh admin identity at 4am. Persistence step following the earlier console compromise.",
+    "difficulty": "easy",
+    "finding_type": "PrivilegeEscalation:IAMUser/AdministrativePermissions"
+  }
+}
