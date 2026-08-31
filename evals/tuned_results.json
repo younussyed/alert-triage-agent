@@ -1,0 +1,402 @@
+[
+  {
+    "id": "corpus-0001",
+    "truth": "benign",
+    "difficulty": "easy",
+    "verdict": "benign",
+    "confidence": 0.92,
+    "disposition": "auto_closed",
+    "reason": "benign with high confidence",
+    "rationale": "This is a network-scoped reconnaissance alert with no IAM principal, consistent with untargeted internet-wide scanning. The 47 alerts in 90 days with a 2% true-positive rate indicates high-volume unauthenticated noise; the source IP shows no threat intelligence hits and the instance has been seen before without incident."
+  },
+  {
+    "id": "corpus-0002",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "A service account with legitimate ReadOnlyAccess permissions made a reconnaissance API call, but the source IP is flagged by threat intelligence (abuse.ch) and located in Russia outside corporate ranges. The low historical true-positive rate (2%) suggests noise, but the authenticated principal combined with a threat-listed source IP warrants investigation to rule out credential compromise."
+  },
+  {
+    "id": "corpus-0003",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "malicious",
+    "confidence": 0.92,
+    "disposition": "escalated",
+    "reason": "verdict is malicious",
+    "rationale": "Access via Tor by an interactive user credential is a dominant indicator of compromise, regardless of base rate. The principal lacks MFA, has ReadOnlyAccess permissions suitable for reconnaissance, and the ListBuckets API aligns with discovery activity typical of account takeover."
+  },
+  {
+    "id": "corpus-0004",
+    "truth": "benign",
+    "difficulty": "easy",
+    "verdict": "benign",
+    "confidence": 0.92,
+    "disposition": "auto_closed",
+    "reason": "benign with high confidence",
+    "rationale": "This is a network-scoped reconnaissance alert with no IAM principal, consistent with untargeted internet-wide port scanning. The 0.02 true-positive rate over 47 alerts in 90 days, combined with a non-threatening source IP (US-based, no threat intel hits, not a known cloud provider), indicates this is routine scanning noise rather than targeted reconnaissance."
+  },
+  {
+    "id": "corpus-0005",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "benign",
+    "confidence": 0.92,
+    "disposition": "auto_closed",
+    "reason": "benign with high confidence",
+    "rationale": "The alert reports GetCallerIdentity invocation from a threat-listed IP, but threat intel shows no hits on the source IP itself, suggesting the threat list may be stale or the IP has been remediated. The principal is an established service account (420 days old) with read-only permissions performing routine identity checks at a normal hour, consistent with CI/CD deployment workflows."
+  },
+  {
+    "id": "corpus-0006",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "GetSecretValue invoked at anomalous volume by a human user without MFA during an unusual hour, from a non-corporate IP. However, the principal has a 420-day account history, ReadOnlyAccess policy limits blast radius, and no threat intel corroboration is present."
+  },
+  {
+    "id": "corpus-0007",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "malicious",
+    "confidence": 0.92,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "Instance role credentials used from outside AWS is a dominant indicator of compromise. The credentials are for an EC2 instance role (i-0c9d8e7f-role), which should never be used outside the AWS environment\u2014this represents credential exfiltration. The external IP is from a non-corporate range with no cloud provider attribution, and the moderate historical true-positive rate (0.5) combined with authenticated, privileged credential misuse outweighs base-rate considerations."
+  },
+  {
+    "id": "corpus-0008",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "ListAccessKeys is a credential enumeration API being invoked anomalously by a non-admin service account without MFA, despite a ReadOnlyAccess policy that should not require such operations. The corporate network source and established account history reduce malice likelihood, but the behavioral anomaly combined with credential-access threat family and 50% historical true-positive rate warrant investigation."
+  },
+  {
+    "id": "corpus-0009",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.78,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "CreateUser and AttachUserPolicy in rapid succession is a classic persistence pattern, and the principal has only ReadOnlyAccess yet attempted IAM modification\u2014a capability mismatch. However, the account is established (420 days old), the source IP is US-based with no threat intel hits, and the alert has a 50% historical true-positive rate, preventing a malicious verdict without additional evidence of compromise."
+  },
+  {
+    "id": "corpus-0010",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "A ReadOnlyAccess principal modified security group ingress rules to open SSH to 0.0.0.0/0, which contradicts their stated permissions and is a classic persistence/lateral movement indicator. While the source IP is corporate and the principal is established, the permission mismatch and security group modification are genuine risk signals that warrant investigation."
+  },
+  {
+    "id": "corpus-0011",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "A critical permission change on a production finance bucket to an unknown cross-account principal is a genuine persistence risk indicator. The absence of an IAM principal, non-corporate source IP, unusual hour, and low historical true-positive rate (0.5) create ambiguity about whether this represents actual compromise or a legitimate but poorly-logged operation."
+  },
+  {
+    "id": "corpus-0012",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "CreateAccessKey on a service account is a persistence mechanism typically associated with credential compromise, but the activity originates from a corporate IP during normal hours for an established service account. The 50% historical true-positive rate and lack of dominant indicators (no public exposure, no audit control disabling, no anonymizing network) prevent a malicious verdict, but the persistence API call on a read-only service account warrants investigation."
+  },
+  {
+    "id": "corpus-0013",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.78,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "A low-privilege user without admin policies or MFA is attempting to grant themselves AdministratorAccess via AttachUserPolicy\u2014a classic privilege escalation pattern. While the account is established (420 days) and the source IP is in the US, the activity occurs at an unusual hour, the principal has no prior history of admin policy attachment, and the source is outside corporate ranges, creating genuine risk indicators that the benign context does not fully explain."
+  },
+  {
+    "id": "corpus-0014",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "A service account with only ReadOnlyAccess is attempting to attach an administrative policy to a deployment role via AttachRolePolicy\u2014a privilege escalation indicator. While the source is corporate and the account is established, the action directly contradicts the principal's current permissions and represents a material deviation from expected service account behavior."
+  },
+  {
+    "id": "corpus-0015",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "Object read volume exceeded baseline by two orders of magnitude from an external, non-corporate IP at an unusual hour, indicating potential data exfiltration. However, the absence of an IAM principal, lack of threat intel hits, and moderate historical true-positive rate (0.5) prevent a malicious verdict without additional evidence of authentication or compromise."
+  },
+  {
+    "id": "corpus-0016",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "An unusual volume of S3 object reads from a corporate IP at a normal hour could indicate legitimate analytics workload scaling, but the absence of an IAM principal, critical severity rating, and exfiltration classification warrant investigation. The 50% historical true-positive rate and corporate network origin provide some reassurance but do not fully explain the baseline deviation."
+  },
+  {
+    "id": "corpus-0017",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "malicious",
+    "confidence": 0.92,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "The alert describes a dominant indicator: making a snapshot publicly accessible via CreateSnapshot followed by ModifySnapshotAttribute. This is a disqualifying exfiltration pattern regardless of the principal's ReadOnlyAccess policy (which should not permit these actions). The combination of anomalous timing, no MFA, and a temporary contractor account with suspicious activity strengthens the assessment."
+  },
+  {
+    "id": "corpus-0018",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "An EC2 instance is querying a Bitcoin mining pool domain, which is a strong indicator of either cryptojacking or intentional mining activity. While the source IP has no threat intel hits and the account has historical activity, the 50% true-positive rate for this alert type combined with the explicit mining-pool domain query warrants human review to determine if this is authorized workload or compromise."
+  },
+  {
+    "id": "corpus-0019",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "Cryptocurrency mining activity on a production instance is a genuine risk indicator suggesting either compromise or unauthorized resource use. However, the instance name 'i-0research99' suggests a research/development context where this could be intentional testing, and the moderate alert volume with 50% historical true-positive rate indicates this is not a high-confidence signature."
+  },
+  {
+    "id": "corpus-0020",
+    "truth": "benign",
+    "difficulty": "easy",
+    "verdict": "benign",
+    "confidence": 0.78,
+    "disposition": "escalated",
+    "reason": "confidence 0.78 below 0.80",
+    "rationale": "SSH brute-force probes against instances are common internet-wide scanning noise. The source IP has no threat intel hits, the alert type has a 50% true-positive rate with only 2 occurrences in 90 days (low volume), and the instance appears to have survived previous similar probes without compromise."
+  },
+  {
+    "id": "corpus-0021",
+    "truth": "benign",
+    "difficulty": "easy",
+    "verdict": "benign",
+    "confidence": 0.78,
+    "disposition": "escalated",
+    "reason": "confidence 0.78 below 0.80",
+    "rationale": "RDP brute-force probes against internet-facing instances are routine noise with a 50% false-positive rate. The source IP shows no threat intelligence hits, is from a non-cloud provider in the US, and the alert frequency (2 in 90 days) is consistent with background scanning rather than targeted compromise."
+  },
+  {
+    "id": "corpus-0022",
+    "truth": "malicious",
+    "difficulty": "hard",
+    "verdict": "benign",
+    "confidence": 0.78,
+    "disposition": "escalated",
+    "reason": "confidence 0.78 below 0.80",
+    "rationale": "SSH brute force attempts against a bastion host are expected attack surface noise; the 50% historical true-positive rate and low alert frequency (2 in 90 days) indicate most are unauthenticated scanning. The source IP shows no threat intel hits and is a residential US address with no cloud provider association, consistent with routine internet-wide reconnaissance rather than targeted compromise."
+  },
+  {
+    "id": "corpus-0023",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "The principal has no MFA enabled despite having console access, and the alert indicates a geography not seen before for this account. However, the source IP is in a US corporate range, the account is established (420 days old), and the principal has only read-only permissions, which limits blast radius."
+  },
+  {
+    "id": "corpus-0024",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "An admin account with no MFA enabled successfully logged in from a non-corporate US IP at an unusual hour (02:21 UTC), which is a first-time geography for this principal. While the IP has no threat intel hits and is in the US, the combination of disabled MFA on a high-privilege account, unusual timing, and new location warrants human review given the 0.5 historical true-positive rate for this alert type."
+  },
+  {
+    "id": "corpus-0025",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "malicious",
+    "confidence": 0.95,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "Disabling CloudTrail logging is a dominant indicator of compromise or malicious intent, regardless of account age or policy attachment. The principal has ReadOnlyAccess yet invoked StopLogging (requiring elevated permissions), the action occurred at an unusual hour (03:07 UTC), and the account lacks MFA protection\u2014all corroborating indicators of unauthorized activity."
+  },
+  {
+    "id": "corpus-0026",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "Disabling S3 access logging is a dominant indicator of potential compromise or malicious activity, as it removes audit trails. However, the activity originated from a corporate IP range during normal hours with no threat intel hits, and the principal has performed similar actions before, suggesting this could be legitimate maintenance."
+  },
+  {
+    "id": "corpus-0027",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "DeleteObjects across multiple S3 prefixes is a high-impact destructive operation on a production bucket, but the absence of an IAM principal prevents confirmation of the actor's identity or authorization. The non-corporate source IP, unusual hour, and 50% historical true-positive rate for this alert type warrant human review to determine whether this represents credential compromise, misconfigured access, or legitimate bulk deletion."
+  },
+  {
+    "id": "corpus-0028",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "An EC2 instance is querying a known C2 domain, which is a strong technical indicator of compromise. However, the moderate historical true-positive rate (0.5) and absence of corroborating network indicators (no threat intel hits on source IP, US-based, not anonymized) create genuine ambiguity about whether this represents actual malicious activity or a false positive."
+  },
+  {
+    "id": "corpus-0029",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "High-entropy DNS queries to a single domain is a recognized data exfiltration technique with moderate base-rate concern (50% TP rate). The instance has prior alert history and the activity occurs at an unusual hour, but no threat intel corroborates the destination and the source IP shows no malicious reputation."
+  },
+  {
+    "id": "corpus-0030",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "An EC2 instance is querying a domain flagged as C2, which is a genuine compromise indicator. However, the source IP is in a US non-corporate range with no threat intel corroboration, and the 50% historical true-positive rate for this alert type suggests a meaningful false-positive baseline that warrants human investigation before escalation."
+  },
+  {
+    "id": "corpus-0031",
+    "truth": "benign",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "Block Public Access disabling is a dominant-indicator-adjacent action that increases exposure risk, but the activity originates from a corporate IP during normal hours with no IAM principal captured. The 50% historical true-positive rate and prior principal activity suggest this could be legitimate configuration management, yet the absence of an IAM principal in a high-risk policy change is concerning and warrants clarification."
+  },
+  {
+    "id": "corpus-0032",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.78,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "A production S3 bucket policy was modified to permit unauthenticated read access\u2014a dominant indicator of potential compromise or misconfiguration. While no IAM principal is associated with this finding (expected for policy changes), the modification to a sensitive bucket warrants investigation despite the moderate historical true-positive rate for this alert type."
+  },
+  {
+    "id": "corpus-0033",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "benign",
+    "confidence": 0.85,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "Root credentials were used from a corporate IP address during normal business hours by an established account. The source is internal (10.20.30.5 in corporate range), the activity is not from an anonymizing network or external location, and the behavioral baseline shows this principal has used root credentials before with a 50% true-positive rate on this alert type, suggesting routine administrative access."
+  },
+  {
+    "id": "corpus-0034",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "Root credentials were used at an unusual hour (03:52 UTC) from a non-corporate IP address, with only 2 prior alerts of this type in 90 days suggesting this is not routine. However, the account is established (420 days old), MFA is not enabled (limiting the severity), and the principal has been seen before, preventing a malicious classification without additional context on what API calls were made."
+  },
+  {
+    "id": "corpus-0035",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "ListBuckets from an unauthenticated source (no IAM principal) is inherently suspicious for discovery activity, and the threat-listed IP designation triggered the alert. However, the IP shows no threat intel hits in enrichment, is in a US corporate range context, and the 50% historical true-positive rate suggests this alert type generates false positives; the lack of corroborating indicators (no actual bucket access, no credential compromise signals) prevents a malicious verdict."
+  },
+  {
+    "id": "corpus-0036",
+    "truth": "benign",
+    "difficulty": "easy",
+    "verdict": "benign",
+    "confidence": 0.85,
+    "disposition": "auto_closed",
+    "reason": "benign with high confidence",
+    "rationale": "The principal sec-auditor holds ReadOnlyAccess policy and the sequence of discovery API calls (DescribeInstances, ListRoles, GetAccountAuthorizationDetails) is consistent with legitimate security auditing or compliance work. The activity originates from a corporate IP range during normal hours, and the principal has performed similar actions before."
+  },
+  {
+    "id": "corpus-0037",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "A non-admin service account with ReadOnlyAccess is performing rapid IAM enumeration at an unusual hour from a non-corporate IP, which deviates from baseline behavior. However, the ReadOnlyAccess policy legitimately permits these discovery APIs, and the account has performed similar activity before, preventing a malicious classification."
+  },
+  {
+    "id": "corpus-0038",
+    "truth": "benign",
+    "difficulty": "hard",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "An EC2 instance initiating outbound connections to a Tor entry node is a genuine risk indicator that warrants investigation, as legitimate workloads rarely require Tor. However, the moderate alert volume (2 in 90 days) with 50% historical true-positive rate and absence of corroborating indicators (no threat intel hits, US-based source IP, instance seen before) prevents a malicious verdict without further evidence."
+  },
+  {
+    "id": "corpus-0039",
+    "truth": "benign",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.62,
+    "disposition": "escalated",
+    "reason": "verdict is suspicious",
+    "rationale": "An EC2 instance querying a low-reputation domain is a genuine risk indicator, but the context is ambiguous: the instance has queried low-reputation domains before (50% historical true-positive rate), the source IP is in a non-corporate US range with no threat intel hits, and the timing is normal. The moderate alert volume and lack of corroborating indicators prevent a malicious verdict, but the domain reputation concern warrants human review."
+  },
+  {
+    "id": "corpus-0040",
+    "truth": "malicious",
+    "difficulty": "easy",
+    "verdict": "suspicious",
+    "confidence": 0.72,
+    "disposition": "escalated",
+    "reason": "finding type is never auto-closed",
+    "rationale": "The sequence of CreateUser + AttachUserPolicy with AdministratorAccess is a classic privilege escalation pattern. While the principal is an established account with legitimate admin access, the absence of MFA, the non-corporate source IP, the unusual hour, and the low historical true-positive rate (0.5) create genuine ambiguity about whether this represents authorized admin activity or credential compromise."
+  }
+]
